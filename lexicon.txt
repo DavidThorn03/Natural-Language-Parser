@@ -1,0 +1,11 @@
+The DT
+A DT
+king NN
+kings NNS
+dislike VB
+dislikes VBZ
+like VB
+likes VBZ
+the DT
+new JJ
+cat NN
