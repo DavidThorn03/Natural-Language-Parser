@@ -1,0 +1,6 @@
+S NP VP DT NN NNS JJ VB
+S -> NP VP
+NP -> DT NN
+NP -> DT NNS
+NP -> DT JJ NN
+VP -> VB NP

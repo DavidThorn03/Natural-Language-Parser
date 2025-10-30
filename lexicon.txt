@@ -1,11 +1,11 @@
-The DT
-A DT
-king NN
-kings NNS
-dislike VB
-dislikes VBZ
-like VB
-likes VBZ
-the DT
-new JJ
-cat NN
+The DT n y
+A DT n n
+king NN y n
+kings NNS y y
+dislike VB y n
+dislikes VB y y
+like VB y n
+likes VB y y
+the DT n n
+new JJ n n
+cat NN y n 
