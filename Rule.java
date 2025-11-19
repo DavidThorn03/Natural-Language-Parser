@@ -27,7 +27,8 @@ public class Rule {
         FileReader fr = new FileReader(filename);
         BufferedReader br = new BufferedReader(fr);
         ArrayList<Rule> rules = new ArrayList<>();
-        POS.getPOSs(br.readLine());
+        POS.getPOSs(br.readLine(), false);
+        POS.getPOSs(br.readLine(), true);
         String line;
         while ((line = br.readLine()) != null) {
             String[] parts = line.split(" -> ");

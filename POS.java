@@ -3,19 +3,25 @@ import java.util.ArrayList;
 public class POS {
     private String tag;
     private static ArrayList<POS> POSs = new ArrayList<>();
+    private boolean isWord;
 
-    private POS(String tag) {
+    private POS(String tag, boolean isWord) {
         this.tag = tag;
+        this.isWord = isWord;
     }
 
     public String getTag() {
         return tag;
     }
 
-    public static void getPOSs(String line) {
+    public boolean isWord() {
+        return isWord;
+    }
+
+    public static void getPOSs(String line, boolean word) {
         String[] parts = line.split(" ");
         for (String part : parts) {
-            POSs.add(new POS(part));
+            POSs.add(new POS(part, word));
         }
     }
 
