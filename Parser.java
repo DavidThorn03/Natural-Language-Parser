@@ -24,39 +24,49 @@ public class Parser {
             }
         }
         try {
-            System.out.println(check(POS.getInstance("S"), sentence, 0));
+            CheckResult result = check(POS.getInstance("S"), sentence, 0);
+            if (result.getIndex() == sentence.size()) {
+                System.out.println("Parse successful!");
+                System.out.println(result.getNode().getBracketStructure());
+            } else {
+                System.out.println("Parse failed.");
+            }
+            System.out.println(result.getIndex());
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public int check(POS pos, ArrayList<Word> sentence, int index) {
+    public CheckResult check(POS pos, ArrayList<Word> sentence, int index) {
         if (pos.isWord()) {
             if (sentence.get(index).getPosTag().equals(pos.getTag())) {
-                return index + 1;
+                return new CheckResult(new TreeNode(sentence.get(index).getWord(), pos), index + 1);
             } else {
-                return -1;
+                return new CheckResult(null, -1);
             }
         }
 
         for (Rule rule : rules) {
             if (rule.getRule().getTag().equals(pos.getTag())) {
+                TreeNode parent = new TreeNode(pos);
                 int currI = index;
                 boolean match = true;
                 for (int i = 0; i < rule.getPoss().size(); i++) {
-                    int newI = check(rule.getPosAt(i), sentence, currI);
-                    if (newI == -1) {
+                    CheckResult child = check(rule.getPosAt(i), sentence, currI);
+                    if (child.getIndex() == -1) {
                         match = false;
                         break;
                     }
-                    currI = newI;
+
+                    parent.addChild(child.getNode());
+                    currI = child.getIndex();
 
                 }
                 if (match) {
-                    return currI;
+                    return new CheckResult(parent, currI);
                 }
             }
         }
-        return -1;
+        return new CheckResult(null, -1);
     }
 }
