@@ -6,14 +6,14 @@ public class Word {
     private String word;
     private POS pos;
     private boolean root;
-    private boolean plural;
+    private int num;
     private static ArrayList<Word> words = new ArrayList<>();
 
-    public Word(String word, POS pos, boolean root, boolean plural) {
+    public Word(String word, POS pos, boolean root, int num) {
         this.word = word;
         this.pos = pos;
         this.root = root;
-        this.plural = plural;
+        this.num = num;
     }
 
     public String getWord() {
@@ -32,8 +32,8 @@ public class Word {
         return root;
     }
 
-    public boolean isPlural() {
-        return plural;
+    public int getNum() {
+        return num;
     }
 
     public static ArrayList<Word> getWords(String filename) throws Exception {
@@ -45,8 +45,8 @@ public class Word {
             String wordStr = parts[0].trim();
             POS pos = POS.getInstance(parts[1].trim());
             boolean root = parts.length > 2 && parts[2].trim().equals("root");
-            boolean plural = parts.length > 3 && parts[3].trim().equals("plural");
-            words.add(new Word(wordStr, pos, root, plural));
+            int num = parts.length > 3 ? Integer.parseInt(parts[3].trim()) : 0;
+            words.add(new Word(wordStr, pos, root, num));
         }
         br.close();
         return words;

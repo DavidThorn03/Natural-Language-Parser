@@ -26,8 +26,9 @@ public class Parser {
         try {
             CheckResult result = check(POS.getInstance("S"), sentence, 0);
             if (result.getIndex() == sentence.size()) {
+                TreeNode root = result.getNode();
                 System.out.println("Parse successful!");
-                System.out.println(result.getNode().getBracketStructure());
+                System.out.println(root.getBracketStructure());
             } else {
                 System.out.println("Parse failed.");
             }
