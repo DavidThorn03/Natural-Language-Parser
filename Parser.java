@@ -6,6 +6,30 @@ public class Parser {
     private ArrayList<Rule> rules;
     private ArrayList<Word> words;
 
+    public Parser(String text) {
+        try {
+            this.rules = Rule.getRules("rules.txt");
+            this.words = Word.getWords("lexicon.txt");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        ArrayList<Word> sentence = new ArrayList<>();
+        for (String word : text.split(" ")) {
+            try {
+                sentence.add(Word.getInstance(word));
+            } catch (Exception e) {
+                System.out.println("Word not found: " + word);
+                return;
+            }
+        }
+        try {
+            System.out.println(check(POS.getInstance("S"), sentence, 0));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public int check(POS pos, ArrayList<Word> sentence, int index) {
         if (pos.isWord()) {
             if (sentence.get(index).getPosTag().equals(pos.getTag())) {
@@ -34,29 +58,5 @@ public class Parser {
             }
         }
         return -1;
-    }
-
-    public Parser(String text) {
-        try {
-            this.rules = Rule.getRules("rules.txt");
-            this.words = Word.getWords("lexicon.txt");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        ArrayList<Word> sentence = new ArrayList<>();
-        for (String word : text.split(" ")) {
-            try {
-                sentence.add(Word.getInstance(word));
-            } catch (Exception e) {
-                System.out.println("Word not found: " + word);
-                return;
-            }
-        }
-        try {
-            System.out.println(check(POS.getInstance("S"), sentence, 0));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 }

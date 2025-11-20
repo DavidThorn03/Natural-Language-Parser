@@ -14,5 +14,7 @@ public class Test {
         parser = new Parser("A kings likes the new cat");
         System.out.println("Test 6: Parsing sentence 'A king like the new cat' should fail.");
         parser = new Parser("A king like the new cat");
+        System.out.println("Test 7: Parsing sentence 'A cat likes the new king' should fail.");
+        parser = new Parser("A cat likes the new king");
     }
 }
