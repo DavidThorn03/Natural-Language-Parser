@@ -27,12 +27,16 @@ public class Parser {
             CheckResult result = check(POS.getInstance("S"), sentence, 0);
             if (result.getIndex() == sentence.size()) {
                 TreeNode root = result.getNode();
-                System.out.println("Parse successful!");
+                NumChecker numChecker = new NumChecker();
+                if (!numChecker.checkNum(root)) {
+                    System.out.println("Number agreement error.");
+                    return;
+                }
+                System.out.println("Parse successful.");
                 System.out.println(root.getBracketStructure());
             } else {
                 System.out.println("Parse failed.");
             }
-            System.out.println(result.getIndex());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -41,7 +45,7 @@ public class Parser {
     public CheckResult check(POS pos, ArrayList<Word> sentence, int index) {
         if (pos.isWord()) {
             if (sentence.get(index).getPosTag().equals(pos.getTag())) {
-                return new CheckResult(new TreeNode(sentence.get(index).getWord(), pos), index + 1);
+                return new CheckResult(new TreeNode(sentence.get(index), pos), index + 1);
             } else {
                 return new CheckResult(null, -1);
             }

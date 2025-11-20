@@ -44,7 +44,7 @@ public class Word {
             String[] parts = line.split(" ");
             String wordStr = parts[0].trim();
             POS pos = POS.getInstance(parts[1].trim());
-            boolean root = parts.length > 2 && parts[2].trim().equals("root");
+            boolean root = parts.length > 2 && parts[2].trim().equals("y");
             int num = parts.length > 3 ? Integer.parseInt(parts[3].trim()) : 0;
             words.add(new Word(wordStr, pos, root, num));
         }

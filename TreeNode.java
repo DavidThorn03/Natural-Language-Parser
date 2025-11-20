@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class TreeNode {
     private POS node;
     private ArrayList<TreeNode> children;
-    private String word;
+    private Word word;
 
     public TreeNode(POS node) {
         this.node = node;
@@ -11,7 +11,7 @@ public class TreeNode {
         this.word = null;
     }
 
-    public TreeNode(String word, POS node) {
+    public TreeNode(Word word, POS node) {
         this.node = node;
         this.children = new ArrayList<>();
         this.word = word;
@@ -29,9 +29,13 @@ public class TreeNode {
         children.add(child);
     }
 
+    public Word getWord() {
+        return word;
+    }
+
     public String getBracketStructure() {
         if (children.isEmpty()) {
-            return "[" + node.getTag() + "[" + word + "]" + "]";
+            return "[" + node.getTag() + "[" + word.getWord() + "]" + "]";
         } else {
             StringBuilder sb = new StringBuilder();
             sb.append("[").append(node.getTag());

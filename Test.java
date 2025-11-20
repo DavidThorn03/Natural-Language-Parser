@@ -1,3 +1,6 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+
 public class Test {
     public static void main(String[] args) {
         System.out.println("Starting Parser Test");
@@ -10,11 +13,23 @@ public class Test {
         parser = new Parser("A new cat likes the king");
         System.out.println("Test 4: Parsing sentence 'The king likes the cat' should fail.");
         parser = new Parser("The king likes the cat");
-        System.out.println("Test 5: Parsing sentence 'A kings likes the new cat' should fail.");
-        parser = new Parser("A kings likes the new cat");
-        System.out.println("Test 6: Parsing sentence 'A king like the new cat' should fail.");
-        parser = new Parser("A king like the new cat");
-        System.out.println("Test 7: Parsing sentence 'A cat likes the new king' should fail.");
+        System.out.println("Test 5: Parsing sentence 'A cat likes the new king' should fail.");
         parser = new Parser("A cat likes the new king");
+
+        System.out.println();
+        System.out.println("--------------------");
+        System.out.println();
+        System.out.println("Now test all possible combinations of singular/plural.");
+        try {
+            FileReader fr = new FileReader("regular_expressions.txt");
+            BufferedReader br = new BufferedReader(fr);
+            String line;
+            while ((line = br.readLine()) != null) {
+                System.out.println("Testing sentence: " + line);
+                parser = new Parser(line);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
