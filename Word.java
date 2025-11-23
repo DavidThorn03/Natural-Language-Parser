@@ -2,6 +2,9 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
 
+// holds information about a word in the lexicon
+// including its part of speech, if it is a root word, its number (singular/plural) and the word itself
+
 public class Word {
     private String word;
     private POS pos;
@@ -36,6 +39,7 @@ public class Word {
         return num;
     }
 
+    // reads words from lexicon file
     public static ArrayList<Word> getWords(String filename) throws Exception {
         FileReader fr = new FileReader(filename);
         BufferedReader br = new BufferedReader(fr);
@@ -52,6 +56,8 @@ public class Word {
         return words;
     }
 
+    // gets a Word instance from the list by matching the word string
+    // (or exception if not found)
     public static Word getInstance(String wordStr) throws Exception {
         for (Word word : words) {
             if (word.word.equals(wordStr)) {

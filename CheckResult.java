@@ -1,3 +1,6 @@
+// class to hold results from recursive checks
+// holds the current word index and current sentence subtree root associated with current node
+
 public class CheckResult {
     private TreeNode node;
     private int index;
