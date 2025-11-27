@@ -8,7 +8,7 @@ public class Parser {
     private ArrayList<Rule> rules;
 
     // constructor takes in input text to be parsed
-    public Parser(String text) {
+    public Parser() {
         // get rules and words from files
         try {
             this.rules = Rule.getRules("rules.txt");
@@ -17,13 +17,16 @@ public class Parser {
             e.printStackTrace();
         }
 
+    }
+
+    public void parse(String text) {
         // convert input text to list of Word instances
         ArrayList<Word> sentence = new ArrayList<>();
         for (String word : text.split(" ")) {
             try {
                 sentence.add(Word.getInstance(word));
             } catch (Exception e) { // or throw error if word not found
-                System.out.println("Word not found: " + word);
+                System.out.println("Word not found: \"" + word + "\"");
                 return;
             }
         }
@@ -41,15 +44,15 @@ public class Parser {
                     return;
                 }
                 // if match, print success and bracket structure
-                System.out.println("Parse successful.");
+                System.out.println("Parse successful");
                 // print bracket structure and tree
                 System.out.println("Bracket Structure:");
                 System.out.println(root.getBracketStructure());
                 System.out.println("Tree Structure:");
+                root.printTree(0);
             } else {
-                System.out.println("Parse failed.");
+                System.out.println("Parse failed");
             }
-            root.printTree(0);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -66,7 +69,7 @@ public class Parser {
                 return new CheckResult(new TreeNode(sentence.get(index), pos), index + 1); // if matches return word
                                                                                            // node and increment index
             } else {
-                return new CheckResult(new TreeNode(sentence.get(index), pos), -1); // else return failure
+                return new CheckResult(new TreeNode(pos), -1); // else return failure
             }
         }
 
