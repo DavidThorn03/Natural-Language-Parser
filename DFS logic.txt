@@ -1,0 +1,14 @@
+starting at root (S)
+
+
+
+check if current POS is word
+	if so, see if current word matches
+		if so return true and increment sentence position by 1
+
+	find matching rules for current POS
+		if match, check each POS in rule (ie recursive call)
+		if all for this rule has matched (all POS checks in subtree have returned true) save this rule as part of answer
+		if not, continue to next matching rule
+	
+	if no matching rules/all matching rules return false, sentence has failed
